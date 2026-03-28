@@ -1,11 +1,6 @@
 Neural Collapse Dynamics: Depth, Activation, Regularisation, and Feature Norm Thresholds
 Official code and data for the paper:
 
-Neural Collapse Dynamics: Depth, Activation, Regularisation, and Feature Norm Thresholds
-[Author Names] · IEEE Access · 2026
-[Paper] · [arXiv]
-
-
 What this repository contains
 ├── notebooks/                        # All experiment notebooks (run on Kaggle/Colab)
 │   ├── neural-collapse-mnist-baseline.ipynb      # Baseline: MLP-5, MNIST, two-phase protocol
@@ -22,13 +17,6 @@ What this repository contains
 ├── NC_IEEE_Access.tex                # Final IEEE Access LaTeX source
 └── nc_references.bib                 # BibTeX bibliography
 
-Key concepts
-Neural collapse (NC) is a geometric regularity that emerges at the end of training: penultimate-layer features converge to a simplex equiangular tight frame (ETF), within-class variability vanishes (NC1), and classifier weights align with class means (NC3).
-This paper asks: what controls when NC emerges?
-Central finding: the mean feature norm (fn) at the moment of collapse concentrates tightly within each (model, dataset) pair — CV < 6% across depths, weight decays, widths, and seeds — and is predictive of collapse timing. Architecture family is the primary driver of this value (4× larger effect than dataset).
-NC metrics measured:
-MetricFormulaMeaningNC1Tr(Σ_W) / Tr(Σ_B) → 0Within-class collapseNC2mean|cos(mᵢ, mⱼ) + 1/(K−1)| → 0ETF alignmentNC31 − (1/K)Σ cos(ŵ_c, m̂_c) → 0Weight–feature dualityfn(1/N) Σ ‖hᵢ‖₂Mean feature norm
-T_NC = first epoch where NC1 < ε (0.01 for ReLU networks; 0.05 for GELU, Tanh, and shallow depths ≤ 3).
 
 Reproducing the results
 Requirements
