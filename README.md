@@ -65,10 +65,6 @@ Open `notebooks/neural-collapse-mnist-baseline.ipynb` on Kaggle or Colab with a 
 4. Compute NC1, NC2, NC3, and fn every 10 epochs
 5. Save `mnist_twophase.csv` with the full training curve
 
-Expected output:
-```
-T_NC (NC1<0.01): epoch 310  feat_norm=1.063
-Test accuracy: 97.1%
 ```
 
 ### Running the full sweep
