@@ -73,20 +73,7 @@ Test accuracy: 97.1%
 
 ### Running the full sweep
 
-Each notebook is self-contained. Run them in order for full reproduction:
-
-| Notebook | Experiment |
-|----------|-----------|
-| `neural-collapse-mnist-baseline.ipynb` | Baseline + CE ablation |
-| `nc-mnist-sweep.ipynb` | H1 depth + H2 activation |
-| `nc-mnist-remaining.ipynb` | GELU/Tanh remaining seeds |
-| `nc-mnist-wd-sweep.ipynb` | H3 weight decay |
-| `NC_Width_Sweep_A100result.ipynb` | H5 width |
-| `NC_CIFAR10_Baseline (1).ipynb` | ResNet-20 / CIFAR-10 |
-| `NC_MLP5_CIFAR10 with result.ipynb` | MLP-5 / CIFAR-10 |
-| `NC_Ablations with results.ipynb` | CE-only + extra GELU seeds |
-| `NC_ResNet20_MNIST_result_seed_1_and_2.ipynb` | ResNet-20 / MNIST baseline |
-
+Each notebook is self-contained. Run them in order for full reproduction.
 Each notebook saves its CSV outputs to the working directory (`/kaggle/working/` or `/tmp/`) and generates figures inline. The final summary figures in the paper were produced by `NC_Final_Colab_A100 with results.ipynb`, which loads the per-experiment CSVs and produces all panels.
 
 
