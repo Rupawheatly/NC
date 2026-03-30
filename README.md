@@ -1,35 +1,49 @@
-# Neural Collapse Dynamics: Depth, Activation, Regularisation, and Feature Norm Thresholds
+# Neural Collapse Dynamics  
+### Depth, Activation, Regularisation, and Feature Norm Thresholds
 
-Official code and data for the paper:
-
-## What this repository contains
-
-```
-├── notebooks/                        # All experiment notebooks (run on Kaggle/Colab)
-│   ├── neural-collapse-mnist-baseline.ipynb      # Baseline: MLP-5, MNIST, two-phase protocol
-│   ├── nc-mnist-sweep.ipynb                      # H1 depth sweep + H2 activation sweep
-│   ├── nc-mnist-remaining.ipynb                  # GELU seeds 1–2, Tanh seeds 0–2
-│   ├── nc-mnist-wd-sweep.ipynb                   # H3 weight decay sweep
-│   ├── NC_Width_Sweep_A100result.ipynb           # H5 width sweep (A100)
-│   ├── NC_Final_Colab_A100 with results.ipynb    # H4 feature norm threshold consolidation
-│   ├── NC_CIFAR10_Baseline (1).ipynb             # ResNet-20 / CIFAR-10 baseline
-│   ├── NC_MLP5_CIFAR10 with result.ipynb         # MLP-5 / CIFAR-10 (architecture effect)
-│   ├── NC_Ablations with results.ipynb           # CE-only ablation + GELU seeds 3–4
-│   ├── NC Baseline Weight Decay Sweep.ipynb      # Early CIFAR-10 weight decay sweep
-│   └── NC_ResNet20_MNIST_result_seed_1_and_2.ipynb  # ResNet-20 / MNIST (completing the architecture × dataset grid)
-```
+Official code and experiment notebooks for the **Neural Collapse Dynamics** research project.  
+This repository contains experiments for MNIST, FashionMNIST, and CIFAR-10 using MLP and ResNet architectures, including ablations, sweeps, and intervention studies.
 
 ---
 
+## 📦 Repository Contents
 
+### 📝 Jupyter Notebooks
+| Notebook | Purpose |
+|----------|---------|
+| `Neural Collapse Dynamics.ipynb` | Overview notebook with experiment walkthrough |
+| `neural-collapse-mnist-baseline.ipynb` | Baseline MLP-5 on MNIST, two-phase protocol |
+| `nc-mnist-sweep.ipynb` | H1 depth sweep + H2 activation sweep on MNIST |
+| `nc-mnist-remaining.ipynb` | GELU and Tanh seed studies |
+| `nc-mnist-wd-sweep.ipynb` | H3 weight decay sweep on MNIST |
+| `NC Baseline Weight Decay Sweep.ipynb` | Additional weight decay experiments for baseline |
+| `NC_Width_Sweep_A100result.ipynb` | H5 width sweep on A100 GPU |
+| `NC_Final_Colab_A100 with results.ipynb` | H4 norm threshold consolidation |
+| `NC_Ablations with results.ipynb` | CE-only ablation + extra seeds |
+| `NC_CIFAR10_Baseline (1).ipynb` | ResNet-20 baseline on CIFAR-10 |
+| `NC_MLP5_CIFAR10 with result.ipynb` | MLP-5 architecture comparison on CIFAR-10 |
+| `NC_FashionMNIST_Baseline.ipynb` | Baseline experiments on FashionMNIST |
+| `NC_ResNet20_MNIST result seed 0 only.ipynb` | ResNet-20 MNIST experiments for seed 0 |
+| `NC_ResNet20_MNIST result seed 1 and 2.ipynb` | ResNet-20 MNIST experiments for seeds 1 and 2 |
+| `NC_Intervention_Experiment_(1).ipynb` | Intervention experiment study |
 
-## Reproducing the results
+---
 
-### Requirements
+### 📂 Folders
+| Folder | Purpose |
+|--------|---------|
+| `Results/` | CSVs and data outputs for all experiments |
+| `figures/` | Saved plots and visualizations from notebooks |
+
+---
+
+## 🚀 Installation & Requirements
+
+Install dependencies:
 
 ```bash
-pip install torch torchvision numpy pandas matplotlib scipy
-```
+pip install torch torchvision numpy pandas matplotlib scipy seaborn
+
 
 Tested with:
 - Python 3.10
@@ -41,8 +55,7 @@ A **GPU is required** for full reproduction. All experiments were run on:
 - Google Colab A100 (40 GB VRAM) — width sweep, final consolidation
 - Google Colab (T4) — CIFAR-10 experiments
 
-CPU-only is possible for the baseline but will be slow (~4–6 hours per run vs ~20 minutes on T4).
-
+CPU-only is possible for the baseline but will be slow.
 ### Running the baseline
 
 Open `notebooks/neural-collapse-mnist-baseline.ipynb` on Kaggle or Colab with a GPU runtime. It will:
