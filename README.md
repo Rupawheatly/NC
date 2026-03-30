@@ -22,7 +22,6 @@ This repository contains experiments for MNIST, FashionMNIST, and CIFAR-10 using
 | `NC_Ablations with results.ipynb` | CE-only ablation + extra seeds |
 | `NC_CIFAR10_Baseline (1).ipynb` | ResNet-20 baseline on CIFAR-10 |
 | `NC_MLP5_CIFAR10 with result.ipynb` | MLP-5 architecture comparison on CIFAR-10 |
-| `NC_FashionMNIST_Baseline.ipynb` | Baseline experiments on FashionMNIST |
 | `NC_ResNet20_MNIST result seed 0 only.ipynb` | ResNet-20 MNIST experiments for seed 0 |
 | `NC_ResNet20_MNIST result seed 1 and 2.ipynb` | ResNet-20 MNIST experiments for seeds 1 and 2 |
 | `NC_Intervention_Experiment_(1).ipynb` | Intervention experiment study |
