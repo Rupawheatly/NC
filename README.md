@@ -1,81 +1,84 @@
-# Neural Collapse Dynamics  
-### Depth, Activation, Regularisation, and Feature Norm Thresholds
+# Supplementary Material
 
-Official code and experiment notebooks for the **Neural Collapse Dynamics** research project.  
-This repository contains experiments for MNIST, FashionMNIST, and CIFAR-10 using MLP and ResNet architectures, including ablations, sweeps, and intervention studies.
+**Paper:** Neural Collapse Dynamics: Depth, Activation, Regularisation, and Feature Norm Thresholds
+**Manuscript ID:** Access-2026-14281
 
----
+This package lets a reader reproduce every reported quantity and figure in the
+paper directly from the per-run training logs, without needing a GPU or re-running
+training.
 
-## 📦 Repository Contents
-
-### 📝 Jupyter Notebooks
-| Notebook | Purpose |
-|----------|---------|
-| `Neural Collapse Dynamics.ipynb` | Overview notebook with experiment walkthrough |
-| `neural-collapse-mnist-baseline.ipynb` | Baseline MLP-5 on MNIST, two-phase protocol |
-| `nc-mnist-sweep.ipynb` | H1 depth sweep + H2 activation sweep on MNIST |
-| `nc-mnist-remaining.ipynb` | GELU and Tanh seed studies |
-| `nc-mnist-wd-sweep.ipynb` | H3 weight decay sweep on MNIST |
-| `NC Baseline Weight Decay Sweep.ipynb` | Additional weight decay experiments for baseline |
-| `NC_Width_Sweep_A100result.ipynb` | H5 width sweep on A100 GPU |
-| `NC_Final_Colab_A100 with results.ipynb` | H4 norm threshold consolidation |
-| `NC_Ablations with results.ipynb` | CE-only ablation + extra seeds |
-| `NC_CIFAR10_Baseline (1).ipynb` | ResNet-20 baseline on CIFAR-10 |
-| `NC_MLP5_CIFAR10 with result.ipynb` | MLP-5 architecture comparison on CIFAR-10 |
-| `NC_ResNet20_MNIST result seed 0 only.ipynb` | ResNet-20 MNIST experiments for seed 0 |
-| `NC_ResNet20_MNIST result seed 1 and 2.ipynb` | ResNet-20 MNIST experiments for seeds 1 and 2 |
-| `NC_Intervention_Experiment_(1).ipynb` | Intervention experiment study |
-
----
-
-### 📂 Folders
-| Folder | Purpose |
-|--------|---------|
-| `Results/` | CSVs and data outputs for all experiments |
-| `figures/` | Saved plots and visualizations from notebooks |
-
----
-
-## 🚀 Installation & Requirements
-
-Install dependencies:
-
-```bash
-pip install torch torchvision numpy pandas matplotlib scipy seaborn
-
-
-Tested with:
-- Python 3.10
-- PyTorch 2.1 (CUDA 11.8)
-- torchvision 0.16
-
-A **GPU is required** for full reproduction. All experiments were run on:
-- Kaggle T4 (16 GB VRAM) — MNIST sweeps
-- Google Colab A100 (40 GB VRAM) — width sweep, final consolidation
-- Google Colab (T4) — CIFAR-10 experiments
-
-CPU-only is possible for the baseline but will be slow.
-### Running the baseline
-
-Open `notebooks/neural-collapse-mnist-baseline.ipynb` on Kaggle or Colab with a GPU runtime. It will:
-
-1. Download MNIST automatically via `torchvision.datasets`
-2. Train MLP-5 (depth=5, width=512, ReLU) for 200 epochs with CE loss (Phase 1)
-3. Switch to MSE loss for 300 epochs (Phase 2)
-4. Compute NC1, NC2, NC3, and fn every 10 epochs
-5. Save `mnist_twophase.csv` with the full training curve
+## Contents
 
 ```
+Supplementary Material/
+├── README.md
+├── notebooks/
+│   ├── verify_paper_numbers.ipynb          # recomputes every number in the paper from the CSVs
+│   ├── generate_all_revision_figures.ipynb # regenerates all figures from the CSVs
+│   ├── verify_csvs.ipynb                   # CSV integrity / fn* summary checker
+│   └── training/                           # the notebooks that produced the data (require GPU)
+│       ├── neural-collapse-mnist-baseline.ipynb
+│       ├── nc-mnist-sweep.ipynb            # depth sweep (MNIST, MLP)
+│       ├── nc-mnist-wd-sweep.ipynb         # weight-decay sweep
+│       ├── NC Baseline Weight Decay Sweep.ipynb
+│       ├── NC_Width_Sweep_A100result.ipynb # width sweep
+│       ├── NC_CIFAR10_Baseline.ipynb       # ResNet-20 / CIFAR-10
+│       ├── NC_FashionMNIST_Baseline.ipynb
+│       ├── NC_ResNet20_MNIST result seed 0 only.ipynb
+│       ├── NC_ResNet20_MNIST result seed 1 and 2.ipynb
+│       ├── NC_Intervention_Experiment.ipynb        # feature-norm rescaling intervention
+│       ├── NC_Final_Colab_A100 with results.ipynb
+│       ├── E1_FashionMNIST_MLP5.ipynb              # Fashion-MNIST / MLP-5
+│       ├── E4_Activation_Homogeneity.ipynb         # ReLU/LeakyReLU/Tanh/GELU
+│       ├── E4b_SiLU_Extended.ipynb                 # SiLU plateau
+│       ├── E5_FashionMNIST_ResNet20.ipynb          # Fashion-MNIST / ResNet-20
+│       └── E2_CIFAR100_ResNet20*.ipynb             # CIFAR-100 attempts (documented as failures)
+├── results/                                # per-run, per-epoch training logs (100 CSV files)
+└── figures/                                # the 11 figures used in the paper (PNG)
+```
 
-### Running the full sweep
+All notebooks are shared **with their executed outputs**, so results are visible
+without re-running. The three verification notebooks at the top of `notebooks/`
+reproduce every reported number and figure from the saved CSVs and run on CPU;
+the `training/` notebooks are the original training scripts that produced the
+CSVs and require a GPU to re-run.
 
-Each notebook is self-contained. Run them in order for full reproduction.
-Each notebook saves its CSV outputs to the working directory (`/kaggle/working/` or `/tmp/`) and generates figures inline. The final summary figures in the paper were produced by `NC_Final_Colab_A100 with results.ipynb`, which loads the per-experiment CSVs and produces all panels.
+## Data format (`results/*.csv`)
 
+Each CSV is one training run, with one row per logged epoch and the columns:
 
+| column | meaning |
+|---|---|
+| `epoch` | training epoch |
+| `phase` | 1 = CE phase, 2 = MSE phase (two-phase protocol) |
+| `train`, `test` | accuracy |
+| `nc1`, `nc2`, `nc3` | neural-collapse metrics |
+| `feat_norm` | mean penultimate feature norm (fn) |
 
-## Acknowledgements
+Summary files (`*_summary.csv`) hold per-seed `fn`/`T_NC` for runs logged at
+summary granularity.
 
-Experiments run on Kaggle (free T4 GPU) and Google Colab (free A100).  
-Datasets downloaded via `torchvision.datasets` (MNIST, CIFAR-10).  
-ResNet-20 implementation follows He et al. (2016), CIFAR-10 variant.
+## How to reproduce
+
+1. Open `notebooks/verify_paper_numbers.ipynb` (Google Colab or local Jupyter).
+2. Point it at the `results/` folder (the notebook auto-detects a local `results/`
+   directory, or set the Drive path in the first cell for Colab).
+3. Run all cells. The notebook recomputes — and prints — every depth, activation,
+   weight-decay, width, and (architecture × dataset) value, the Kruskal–Wallis
+   statistics and effect sizes, the intervention results, the predictive lead time,
+   and the CIFAR-100 diagnostics, with a built-in cross-check against the
+   paper-reported values.
+4. `generate_all_revision_figures.ipynb` regenerates every figure from the same CSVs.
+
+## Conventions
+
+- Dispersion statistics use the sample standard deviation (ddof = 1).
+- Confidence intervals are 95% Student-t intervals (df = N − 1).
+- Between-pair significance uses the rank-based Kruskal–Wallis test with the
+  ε² effect size.
+
+## Hardware
+
+All training runs used single NVIDIA T4 GPUs (Google Colab and Kaggle); the
+verification notebooks need only CPU. The same code is also mirrored at:
+https://github.com/Rupawheatly/NC
