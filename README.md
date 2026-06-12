@@ -80,5 +80,5 @@ summary granularity.
 ## Hardware
 
 All training runs used single NVIDIA T4 GPUs (Google Colab and Kaggle); the
-verification notebooks need only CPU. The same code is also mirrored at:
-https://github.com/Rupawheatly/NC
+verification notebooks need only CPU. 
+
