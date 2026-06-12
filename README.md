@@ -1,7 +1,7 @@
 # Supplementary Material
 
 **Paper:** Neural Collapse Dynamics: Depth, Activation, Regularisation, and Feature Norm Thresholds
-**Manuscript ID:** Access-2026-14281
+
 
 This package lets a reader reproduce every reported quantity and figure in the
 paper directly from the per-run training logs, without needing a GPU or re-running
@@ -79,6 +79,5 @@ summary granularity.
 
 ## Hardware
 
-All training runs used single NVIDIA T4 GPUs (Google Colab and Kaggle); the
-verification notebooks need only CPU. 
+All training runs used single NVIDIA T4 GPUs (Google Colab and Kaggle); the verification notebooks need only CPU. 
 
