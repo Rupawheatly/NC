@@ -1,0 +1,4 @@
+arch,dataset,optimizer,seed,T_NC_strict,fn_strict,T_NC_relaxed,fn_relaxed,fn_preln_final,test_acc_final
+vit,mnist,adamw,0,,,410,12.527828216552734,976.9534301757812,0.9885
+vit,mnist,adamw,1,,,420,12.714295387268066,744.8365478515625,0.9893
+vit,mnist,adamw,2,,,400,12.774725914001465,999.3662109375,0.9876
