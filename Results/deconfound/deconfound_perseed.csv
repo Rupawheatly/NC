@@ -1,0 +1,12 @@
+arch,optimizer,seed,T_NC_strict,fn_strict,note
+mlp5,adam,0,250,1.0561,
+mlp5,adam,1,330,1.0953,
+mlp5,adam,2,340,1.1347,
+resnet20,adam,0,150,7.4248,
+resnet20,adam,1,130,7.6129,
+resnet20,adam,2,160,7.3669,
+resnet20,sgd,0,110,5.8769,matched-control reproduction of main grid
+resnet20,sgd,1,110,5.8649,matched-control reproduction of main grid
+mlp5,sgd,0,210,0.0000,degenerate non-ETF (lr=0.1); excluded
+mlp5,sgd,1,210,0.0000,degenerate non-ETF (lr=0.1); excluded
+mlp5,sgd,2,210,0.0000,degenerate non-ETF (lr=0.1); excluded
