@@ -1,7 +1,7 @@
 # Supplementary Material
 
 **Paper:** Neural Collapse Dynamics: Depth, Activation, Regularisation, and Feature Norm Thresholds
-**Submitted to:** Neurocomputing (Elsevier)
+
 
 Everything needed to reproduce every reported number and figure from the per-run
 training logs, no GPU required. All notebooks include their executed outputs.
